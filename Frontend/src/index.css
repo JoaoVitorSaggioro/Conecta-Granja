@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-wheat-50 text-ink-900 font-sans antialiased;
+  background-image:
+    radial-gradient(900px 420px at 0% -10%, rgba(47, 122, 84, 0.08), transparent 55%),
+    radial-gradient(700px 380px at 100% 0%, rgba(176, 125, 42, 0.07), transparent 50%);
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition duration-200 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-pine-700 text-white shadow-lift hover:bg-pine-600;
+  }
+
+  .btn-secondary {
+    @apply btn border border-pine-200 bg-white text-pine-800 hover:bg-pine-50;
+  }
+
+  .btn-danger {
+    @apply btn bg-clay-500 text-white hover:bg-clay-600;
+  }
+
+  .btn-ghost {
+    @apply btn text-ink-500 hover:bg-white/70;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-pine-200/80 bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition placeholder:text-ink-500/50 focus:border-pine-500 focus:ring-4 focus:ring-pine-500/10;
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-pine-700/80;
+  }
+
+  .card {
+    @apply rounded-2xl border border-white/70 bg-white/80 shadow-panel backdrop-blur-sm;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e4f39;
+  border-radius: 999px;
+  border: 2px solid #fbf7ee;
+}
+
+.grain {
+  position: relative;
+}
+
+.grain::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-overlay-in {
+  animation: overlay-in 180ms ease-out both;
+}
+
+.animate-panel-in {
+  animation: panel-in 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-overlay-in,
+  .animate-panel-in,
+  .animate-pulse {
+    animation: none;
+  }
+}
